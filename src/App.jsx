@@ -10,7 +10,7 @@ library.add(fab, fas);
 import "./output.css";
 import * as React from "react";
 import Modal from "@mui/joy/Modal";
-import { ModalClose, ModalDialog, Sheet, Typography } from "@mui/joy";
+import { Sheet } from "@mui/joy";
 
 function App() {
   const [textSearch, setTextSearch] = useState("");
