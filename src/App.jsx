@@ -101,7 +101,7 @@ function App() {
                   <div className="grid grid-cols-2 gap-2">
                     {filters.map((filter) => {
                       return (
-                        <p className="p-2 bg-primary/40 border border-primary rounded-full text-center text-white font-semibold">
+                        <p className="p-2 bg-primary/40 border border-primary rounded-xl text-center text-white font-semibold">
                           {filter}
                         </p>
                       );
