@@ -13,7 +13,9 @@ import Modal from "@mui/joy/Modal";
 import { ModalClose, ModalDialog, Sheet, Typography } from "@mui/joy";
 
 function App() {
-  const [projectSearch, setProjectSearch] = useState("");
+  const [textSearch, setTextSearch] = useState("");
+  console.log(textSearch);
+
   const [searching, setSearching] = useState(false);
 
   console.log(searching);
@@ -28,6 +30,8 @@ function App() {
     "Bootstrap",
     "GitHub",
   ];
+
+  const filters = ["filter1", "filter2", "filter3", "filter4", "filter5"];
 
   return (
     <main className="max-w-full m-auto bg-inherit">
@@ -47,20 +51,11 @@ function App() {
                 onClick={() => {
                   searching ? setSearching(false) : setSearching(true);
                 }}
-                enterKeyHint="go"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  className="w-4 h-4 text-secondary"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <FontAwesomeIcon
+                  icon="fa-solid fa-magnifying-glass"
+                  className="w-3 h-3 text-primary mr-1"
+                />
                 Quick Search
                 <span className="ml-auto pl-3 flex-none text-xs font-semibold">
                   ⌘ K
@@ -75,35 +70,42 @@ function App() {
                   justifyContent: "center",
                   alignItems: "center",
                 }}
+                autoFoucs={false}
               >
                 <Sheet
                   variant="outlined"
                   sx={{
-                    maxWidth: 500,
+                    maxWidth: 1080,
+                    minWidth: 500,
                     borderRadius: "md",
                     p: 3,
                     boxShadow: "lg",
                   }}
                 >
-                  <h2 className="text-xl text-primary font-bold">
-                    What you want to search?
-                  </h2>
+                  <header>
+                    <form>
+                      <label htmlFor="docsearch"></label>
+                      <input
+                        placeholder="Type to find..."
+                        value={textSearch}
+                        maxLength={64}
+                        onChange={(event) => {
+                          setTextSearch(event.target.value);
+                        }}
+                        className="w-full h-auto py-2 mb-3 border-b border-primary"
+                        enterKeyHint="go"
+                        autoFocus={true}
+                      />
+                    </form>
+                  </header>
                   <div className="grid grid-cols-2 gap-2">
-                    <p className="p-2 bg-primary/40 border border-primary rounded-full text-center text-white font-semibold">
-                      filter1
-                    </p>
-                    <p className="p-2 bg-primary/40 border border-primary rounded-full text-center text-white font-semibold">
-                      filter2
-                    </p>
-                    <p className="p-2 bg-primary/40 border border-primary rounded-full text-center text-white font-semibold">
-                      filter3
-                    </p>
-                    <p className="p-2 bg-primary/40 border border-primary rounded-full text-center text-white font-semibold">
-                      filter4
-                    </p>
-                    <p className="p-2 bg-primary/40 border border-primary rounded-full text-center text-white font-semibold">
-                      filter5
-                    </p>
+                    {filters.map((filter) => {
+                      return (
+                        <p className="p-2 bg-primary/40 border border-primary rounded-full text-center text-white font-semibold">
+                          {filter}
+                        </p>
+                      );
+                    })}
                   </div>
                 </Sheet>
               </Modal>
