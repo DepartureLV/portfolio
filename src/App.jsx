@@ -1,40 +1,30 @@
 import { useEffect, useState } from "react";
 
+// data
+import { skills } from "./context/skills";
+import { filters } from "./context/filters";
+import { experience } from "./context/experiences";
+
+// font awesome
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 library.add(fab, fas);
 
 import "./output.css";
+
+// @mui
 import * as React from "react";
 import Modal from "@mui/joy/Modal";
 import { Sheet } from "@mui/joy";
 
 function App() {
   const [textSearch, setTextSearch] = useState("");
-  console.log(textSearch);
-
   const [searching, setSearching] = useState(false);
 
-  console.log(searching);
-
-  const skills = [
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "React.js",
-    "Vue.js",
-    "Tailwind",
-    "Bootstrap",
-    "GitHub",
-  ];
-
-  const filters = ["filter1", "filter2", "filter3", "filter4", "filter5"];
-
   return (
-    <main className="max-w-full m-auto bg-inherit">
+    <main className="max-w-full m-auto bg-inherit text-ps-black">
       <>
         <nav className="w-full flex items-center justify-between py-3 px-6 item-center border-b border-primary">
           <img
@@ -45,7 +35,7 @@ function App() {
           <ul className="flex items-center gap-4">
             <li>
               <button
-                className="hidden w-full lg:flex items-center text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-3 hover:ring-primary bg-slate-200/30 dark:highlight-white/5 hover:bg-slate-100/70"
+                className=" w-full flex items-center text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-3 hover:ring-primary bg-slate-200/30 dark:highlight-white/5 hover:bg-slate-100/70"
                 required
                 type="text"
                 onClick={() => {
@@ -76,9 +66,9 @@ function App() {
                   variant="outlined"
                   sx={{
                     maxWidth: 1080,
-                    minWidth: 500,
+                    minWidth: 800,
                     borderRadius: "md",
-                    p: 3,
+                    p: 0,
                     boxShadow: "lg",
                   }}
                 >
@@ -92,18 +82,23 @@ function App() {
                         onChange={(event) => {
                           setTextSearch(event.target.value);
                         }}
-                        className="w-full h-auto py-2 mb-3 border-b border-primary"
+                        className="w-full h-auto p-4 border-b border-primary"
                         enterKeyHint="go"
                         autoFocus={true}
                       />
                     </form>
                   </header>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="flex flex-col">
                     {filters.map((filter) => {
                       return (
-                        <p className="p-2 bg-primary/40 border border-primary rounded-xl text-center text-white font-semibold">
-                          {filter}
-                        </p>
+                        <a
+                          href={filter.link}
+                          className=" hover:bg-slate-100/90"
+                        >
+                          <div className="flex items-center p-4 border-primary border-b text-ps-black font-semibold">
+                            <p>{filter.name}</p>
+                          </div>
+                        </a>
                       );
                     })}
                   </div>
@@ -209,42 +204,28 @@ function App() {
             </ul>
           </section>
 
-          <section>
+          <section className="pb-6 mb-6 border-b border-primary">
             <h2 className="text-3xl mb-2 text-primary font-bold">
               Experiences
             </h2>
-            <div className="grid grid-cols-[50px_minmax(0,_1fr)_minmax(0,_1fr)] gap-4">
-              <div>
-                <img
-                  src="./src/assets/react.svg"
-                  className="w-10 h-10 m-auto"
-                />
+
+            {experience.map((item) => (
+              <div className="grid grid-cols-[50px_minmax(0,_1fr)_minmax(0,_1fr)] gap-4 mb-6">
+                <div>
+                  <img src={item.src} className="w-10 h-10 m-auto" />
+                </div>
+                <div>
+                  <h3 className="text-xl mb-2 text-primary font-bold">
+                    {item.title}
+                  </h3>
+                  <p className="text-balance">{item.resp}</p>
+                </div>
+                <div>{item.descb}</div>
               </div>
-              <div>
-                <h3 className="text-xl mb-2 text-primary font-bold">Title</h3>
-                <p className="text-balance">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
-                </p>
-              </div>
-              <div>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </div>
-            </div>
+            ))}
           </section>
         </div>
+
         <footer className="max-w-[1080px] m-auto flex justify-between">
           <p>Nattawat Pitikomon</p>
           <div className="flex gap-4">

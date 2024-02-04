@@ -5,8 +5,11 @@ export default {
     extend: {
       colors: {
         primary: "#ef3c20",
+        // ef3c20 not pass 7:1
+        // FF6047 pass all
         secondary: "#7e9272",
         "ps-black": "#262626",
+        "ps-grey": "#849cbd",
         "ps-canvas": "#ebe0cd",
       },
       // backgroundImage: {
